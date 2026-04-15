@@ -3,3 +3,5 @@
 ### 技术
 - 前端：Vue+Vite+TS+UnoCSS+ElementPlus
 - 后端：Nestjs+TypeORM+Mysql+Redis
+### 优化
+把Nestjs底层切换成fastify
