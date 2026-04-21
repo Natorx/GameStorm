@@ -138,6 +138,9 @@ importers:
       svelte-check:
         specifier: ^4.4.6
         version: 4.4.6(picomatch@4.0.4)(svelte@5.55.4(@typescript-eslint/types@8.58.2))(typescript@5.9.3)
+      tinro5:
+        specifier: ^0.0.11
+        version: 0.0.11
       ts-jest:
         specifier: ^29.2.5
         version: 29.4.9(@babel/core@7.29.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.29.0))(jest-util@29.7.0)(jest@29.7.0(@types/node@22.19.17)(ts-node@10.9.2(@swc/core@1.15.24)(@types/node@22.19.17)(typescript@5.9.3)))(typescript@5.9.3)
@@ -4504,6 +4507,9 @@ packages:
 
   through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
+
+  tinro5@0.0.11:
+    resolution: {integrity: sha512-kK+COnbhfOHUjIG4EsPcipEvshtxNN4M0pkG8TaWuZguLovwY4kDFcQeso7XdJ4cQE/LWTeR2fbSxZmo5adAtQ==}
 
   tinyexec@1.1.1:
     resolution: {integrity: sha512-VKS/ZaQhhkKFMANmAOhhXVoIfBXblQxGX1myCQ2faQrfmobMftXeJPcZGp0gS07ocvGJWDLZGyOZDadDBqYIJg==}
@@ -9863,6 +9869,8 @@ snapshots:
       real-require: 0.2.0
 
   through@2.3.8: {}
+
+  tinro5@0.0.11: {}
 
   tinyexec@1.1.1: {}
 
