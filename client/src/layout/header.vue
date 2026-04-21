@@ -9,9 +9,8 @@ const isMenuOpen = ref(false)
 
 const navItems = [
   { path: '/', name: '首页',  },
-  { path: '/games', name: '分类导航',  },
-  { path: '/dynamic', name: '游戏动态',  },
-  { path: '/peripherals', name: '周边商城',  },
+  { path: '/games', name: '游戏大厅',  },
+  { path: '/dynamic', name: '游戏社区',  },
   { path: '', name: '敬请期待', disabled: true }
 ]
 

@@ -10,7 +10,8 @@
     "build_server": "cd server && nest build",
     "build_client": "cd client && vite build",
     "dev_server": "cd server && nest start --watch",
-    "dev_client": "cd client && vite"
+    "dev_client": "cd client && vite",
+    "dev_svelte":"cd svelte && vite"
   },
   "keywords": [],
   "author": "",
@@ -68,7 +69,11 @@
     "vite-plugin-vue-devtools": "^8.1.1",
     "vue-tsc": "^3.2.6",
     "unplugin-auto-import": "^0.17.6",
-    "unplugin-vue-components": "^0.27.0"
+    "unplugin-vue-components": "^0.27.0",
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
+    "@tsconfig/svelte": "^5.0.8",
+    "svelte": "^5.55.4",
+    "svelte-check": "^4.4.6"
   },
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
