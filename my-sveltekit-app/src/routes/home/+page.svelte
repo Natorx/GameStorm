@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-
+	import mockImage from '$lib/assets/mock.jpg';
+	import { Carousel } from "flowbite-svelte";
 	// 类型定义
 	interface Game {
 		id: number;
@@ -12,9 +13,6 @@
 		createtime: string;
 		state: number;
 	}
-
-	// Mock 数据
-	const mockImage = 'https://picsum.photos/200/150?random'; // 示例图片地址
 
 	function formatDate(date: Date): string {
 		return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -83,6 +81,24 @@
 		}
 	];
 
+	const mockCarouselImages = [
+    {
+      src: mockImage,
+      alt: "图片描述1",
+      title: ""
+    },
+    {
+      src: mockImage,
+      alt: "图片描述2",
+      title: ""
+    },
+    {
+      src: mockImage,
+      alt: "图片描述3",
+      title: ""
+    }
+  ];
+
 	let gamesRandom = $state<Game[]>([]);
 
 	// 处理函数
@@ -95,32 +111,48 @@
 		console.log('查看详情:', game);
 		// 跳转详情页逻辑
 	}
+	  let isMounted = $state(false);
 
 	onMount(() => {
 		gamesRandom = mockRandomGames.filter((game: Game) => game.state === 1);
+		isMounted = true;
 	});
 </script>
 
+<div class="w-full max-w-6xl mx-auto px-4 mt-10">
+  <div class="relative h-120 w-full overflow-hidden rounded-xl">
+    {#if isMounted}
+      <Carousel 
+        images={mockCarouselImages} 
+        duration={5000}
+        slideDuration={1500}
+        class="h-full w-full"
+      >
+      </Carousel>
+    {/if}
+  </div>
+</div>
+
 <!-- 每日推荐 -->
 <section class="mt-10">
-	<div class="mb-6 flex items-center justify-between">
-		<div>
-			<h2
-				class="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-3xl font-bold text-transparent"
-			>
-				今日推荐
-			</h2>
-			<div class="mt-2 h-1 w-20 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
-			<p class="mt-2 text-sm text-gray-400">你可能会喜欢这些游戏~</p>
-		</div>
-		<button
-			type="button"
-			class="cursor-pointer text-sm text-gray-400 transition-colors hover:text-white"
-			onclick={() => handleViewMore('今日推荐')}
-		>
-			更多推荐 →
-		</button>
-	</div>
+<div class="mb-6 flex items-center justify-between">
+  <div>
+    <h2
+      class="bg-linear-to-r from-white to-gray-300 bg-clip-text text-3xl font-bold text-transparent"
+    >
+      今日推荐
+    </h2>
+    <div class="mt-2 h-1 w-20 rounded-full bg-linear-to-r from-orange-500 to-orange-300"></div>
+    <p class="mt-2 text-sm text-gray-400">你可能会喜欢这些游戏~</p>
+  </div>
+  <button
+    type="button"
+    class="cursor-pointer text-sm text-gray-400 transition-colors hover:text-white"
+    onclick={() => handleViewMore('今日推荐')}
+  >
+    更多推荐 →
+  </button>
+</div>
 
 	<div class="daily-recommendations">
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -128,7 +160,7 @@
 				<div
 					class="group flex overflow-hidden rounded-xl bg-[#4C4C50]/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
 				>
-					<div class="h-32 w-32 flex-shrink-0 overflow-hidden">
+					<div class="h-32 w-32 shrink-0 overflow-hidden">
 						<img
 							src={game.path}
 							alt={game.title}

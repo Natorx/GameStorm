@@ -4,7 +4,7 @@
 	import { page } from '$app/state'; // ← Svelte 5 runes 版本
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
 	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
+	import favicon from '$lib/assets/logo.svg';
 	import { goto } from '$app/navigation';
 	import logoUrl from '$lib/assets/logo.svg';
 
@@ -118,14 +118,14 @@
 		</div>
 	</header>
 
-  <main class="flex-1 pt-[70px] overflow-x-hidden">
-    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+  <main class="flex-1 pt-17.5 overflow-x-hidden">
+    <div class="max-w-350 mx-auto px-4 sm:px-6 lg:px-8">
       {@render children()}
     </div>
   </main>
 
 	<!-- 页脚 -->
-	<footer class="mt-[60px] border-t border-white/10 bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a]">
+	<footer class="mt-15 border-t border-white/10 bg-linear-to-br from-[#0a0a0a] to-[#1a1a1a]">
 		<!-- 主内容区域 -->
 		<div class="border-b border-white/10">
 			<div
