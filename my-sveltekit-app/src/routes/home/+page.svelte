@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import mockImage from '$lib/assets/mock.jpg';
 	import { Carousel } from "flowbite-svelte";
+	
 	// 类型定义
 	interface Game {
 		id: number;
@@ -84,34 +85,34 @@
 	const mockCarouselImages = [
     {
       src: mockImage,
-      alt: "图片描述1",
-      title: ""
+      alt: "游戏截图1",
+      title: "星穹铁道"
     },
     {
       src: mockImage,
-      alt: "图片描述2",
-      title: ""
+      alt: "游戏截图2",
+      title: "绝区零"
     },
     {
       src: mockImage,
-      alt: "图片描述3",
-      title: ""
+      alt: "游戏截图3",
+      title: "鸣潮"
     }
   ];
 
 	let gamesRandom = $state<Game[]>([]);
+	let currentSlide = $state(0);
 
 	// 处理函数
 	function handleViewMore(category: string) {
 		console.log(`查看更多: ${category}`);
-		// 跳转逻辑等
 	}
 
 	function handleViewDetail(game: Game) {
 		console.log('查看详情:', game);
-		// 跳转详情页逻辑
 	}
-	  let isMounted = $state(false);
+
+	let isMounted = $state(false);
 
 	onMount(() => {
 		gamesRandom = mockRandomGames.filter((game: Game) => game.state === 1);
@@ -119,81 +120,184 @@
 	});
 </script>
 
-<div class="w-full max-w-6xl mx-auto px-4 mt-10">
-  <div class="relative h-120 w-full overflow-hidden rounded-xl">
-    {#if isMounted}
-      <Carousel 
-        images={mockCarouselImages} 
-        duration={5000}
-        slideDuration={1500}
-        class="h-full w-full"
-      >
-      </Carousel>
-    {/if}
+<!-- 橙黑主题轮播区 - Steam风格 -->
+<div class="w-full max-w-7xl mx-auto px-4 mt-6">
+  <div class="flex flex-col lg:flex-row gap-6 items-center">
+    
+    <!-- 左侧文字介绍区 - 适中大小，橙黑配色 -->
+    <div class="lg:w-2/5 w-full">
+      <div class="space-y-4">
+        <!-- 橙黑主题标签 -->
+        <div class="flex items-center gap-2">
+          <div class="w-1 h-6 bg-orange-500 rounded-full"></div>
+          <span class="text-orange-500 font-semibold text-sm tracking-wider">🔥 热门推荐</span>
+        </div>
+        
+        <!-- 标题 - Steam风格，不会太大 -->
+        <h1 class="text-3xl md:text-4xl font-bold tracking-tight">
+          <span class="text-white">今日</span>
+          <span class="text-orange-500">橙黑</span>
+          <span class="text-white">精选</span>
+        </h1>
+        
+        <!-- 副标题/描述 -->
+        <p class="text-gray-300 text-sm leading-relaxed">
+          探索我们精心挑选的橙黑主题游戏合集，从视觉风格到游戏体验，
+          每一款都彰显独特个性。大胆的色彩碰撞，深邃的黑与活力的橙，
+          带来前所未有的游戏盛宴。
+        </p>
+        
+        <!-- 数据统计 -->
+        <div class="flex gap-6 pt-2">
+          <div>
+            <div class="text-2xl font-bold text-orange-500">6+</div>
+            <div class="text-xs text-gray-400">精选游戏</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-orange-500">100%</div>
+            <div class="text-xs text-gray-400">免费开玩</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-orange-500">24/7</div>
+            <div class="text-xs text-gray-400">在线畅玩</div>
+          </div>
+        </div>
+        
+        <!-- 行动按钮 -->
+        <div class="flex gap-3 pt-2">
+          <button class="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-orange-500/25">
+            立即体验
+          </button>
+          <button class="px-6 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold rounded-lg transition-all duration-300 border border-gray-700">
+            了解更多
+          </button>
+        </div>
+        
+        <!-- 末尾批注/短语 -->
+        <div class="pt-4 border-t border-orange-500/20">
+          <p class="text-orange-400/80 text-sm italic flex items-center gap-2">
+            <span class="text-orange-500">✦</span>
+            活力与沉稳的交响 · 橙黑美学新定义
+            <span class="text-orange-500">✦</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 右侧轮播图区 -->
+    <div class="lg:w-3/5 w-full">
+      <div class="relative rounded-xl overflow-hidden shadow-2xl">
+        {#if isMounted}
+          <Carousel 
+            images={mockCarouselImages} 
+            duration={5000}
+            slideDuration={1500}
+            class="h-64 md:h-80 lg:h-96 w-full"
+          />
+          
+          <!-- 轮播图叠加内容 - 让画面更丰富 -->
+          <div class="absolute inset-0 pointer-events-none">
+            <!-- 渐变遮罩层 -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-orange-500/20"></div>
+            
+            <!-- 底部游戏标题 -->
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+              <div class="flex justify-between items-end text-white">
+                <div>
+                  <p class="text-xs text-orange-400 font-mono">当前热门</p>
+                  <p class="text-lg font-bold">{mockCarouselImages[currentSlide]?.title || '精选游戏'}</p>
+                </div>
+                <div class="flex gap-1">
+                  <div class="w-8 h-8 bg-orange-500/20 rounded-full flex items-center justify-center text-orange-400 text-sm">
+                    {currentSlide + 1}/{mockCarouselImages.length}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 装饰性元素 -->
+            <div class="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-orange-400/40 rounded-tr-lg"></div>
+            <div class="absolute bottom-4 left-4 w-12 h-12 border-b-2 border-l-2 border-orange-400/40 rounded-bl-lg"></div>
+            
+            <!-- 橙黑主题光晕效果 -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
+          </div>
+        {/if}
+      </div>
+      
+      <!-- 轮播图指示器 -->
+      <div class="flex justify-center gap-2 mt-4">
+        {#each mockCarouselImages as img, i}
+          <button 
+            class="transition-all duration-300 rounded-full {currentSlide === i ? 'w-6 h-2 bg-orange-500' : 'w-2 h-2 bg-gray-600 hover:bg-gray-500'}"
+            onclick={() => currentSlide = i}
+          />
+        {/each}
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- 每日推荐 -->
-<section class="mt-10">
-<div class="mb-6 flex items-center justify-between">
-  <div>
-    <h2
-      class="bg-linear-to-r from-white to-gray-300 bg-clip-text text-3xl font-bold text-transparent"
+<section class="mt-16">
+  <div class="mb-6 flex items-center justify-between max-w-7xl mx-auto px-4">
+    <div>
+      <h2 class="text-2xl md:text-3xl font-bold">
+        <span class="text-white">今日</span>
+        <span class="text-orange-500">推荐</span>
+      </h2>
+      <div class="mt-2 h-1 w-16 rounded-full bg-gradient-to-r from-orange-500 to-orange-300"></div>
+      <p class="mt-2 text-sm text-gray-400">你可能会喜欢这些游戏~</p>
+    </div>
+    <button
+      type="button"
+      class="cursor-pointer text-sm text-gray-400 transition-colors hover:text-orange-500"
+      onclick={() => handleViewMore('今日推荐')}
     >
-      今日推荐
-    </h2>
-    <div class="mt-2 h-1 w-20 rounded-full bg-linear-to-r from-orange-500 to-orange-300"></div>
-    <p class="mt-2 text-sm text-gray-400">你可能会喜欢这些游戏~</p>
+      更多推荐 →
+    </button>
   </div>
-  <button
-    type="button"
-    class="cursor-pointer text-sm text-gray-400 transition-colors hover:text-white"
-    onclick={() => handleViewMore('今日推荐')}
-  >
-    更多推荐 →
-  </button>
-</div>
 
-	<div class="daily-recommendations">
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-			{#each gamesRandom.slice(0, 6) as game (game.id)}
-				<div
-					class="group flex overflow-hidden rounded-xl bg-[#4C4C50]/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-				>
-					<div class="h-32 w-32 shrink-0 overflow-hidden">
-						<img
-							src={game.path}
-							alt={game.title}
-							class="h-full w-full transform object-cover transition-transform duration-500 group-hover:scale-110"
-						/>
-					</div>
+  <div class="daily-recommendations max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {#each gamesRandom.slice(0, 6) as game (game.id)}
+        <div
+          class="group flex overflow-hidden rounded-xl bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:border-orange-500/30"
+        >
+          <div class="h-32 w-32 shrink-0 overflow-hidden">
+            <img
+              src={game.path}
+              alt={game.title}
+              class="h-full w-full transform object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          </div>
 
-					<div class="flex-1 p-4">
-						<h3 class="mb-1 line-clamp-1 text-lg font-bold text-white">{game.name}</h3>
-						<div class="mb-2 text-sm text-gray-400">{game.type || '休闲游戏'}</div>
+          <div class="flex-1 p-4">
+            <h3 class="mb-1 line-clamp-1 text-lg font-bold text-white">{game.name}</h3>
+            <div class="mb-2 text-sm text-orange-400">{game.type || '休闲游戏'}</div>
 
-						<div class="flex items-center justify-between">
-							{#if game.price === 0}
-								<div class="font-semibold text-green-400">
-									<span class="text-sm">免费开玩</span>
-								</div>
-							{:else}
-								<div class="font-bold text-white">
-									<span class="text-lg">¥</span>
-									<span class="text-xl">{game.price}</span>
-								</div>
-							{/if}
+            <div class="flex items-center justify-between">
+              {#if game.price === 0}
+                <div class="font-semibold text-green-400">
+                  <span class="text-sm">免费开玩</span>
+                </div>
+              {:else}
+                <div class="font-bold text-white">
+                  <span class="text-lg">¥</span>
+                  <span class="text-xl">{game.price}</span>
+                </div>
+              {/if}
 
-							<button
-								class="rounded-lg bg-blue-500/80 px-3 py-1.5 text-sm font-semibold transition-all duration-300 hover:bg-blue-500"
-								onclick={() => handleViewDetail(game)}
-							>
-								查看详情
-							</button>
-						</div>
-					</div>
-				</div>
-			{/each}
-		</div>
-	</div>
+              <button
+                class="rounded-lg bg-orange-500/80 px-3 py-1.5 text-sm font-semibold transition-all duration-300 hover:bg-orange-500"
+                onclick={() => handleViewDetail(game)}
+              >
+                查看详情
+              </button>
+            </div>
+          </div>
+        </div>
+      {/each}
+    </div>
+  </div>
 </section>

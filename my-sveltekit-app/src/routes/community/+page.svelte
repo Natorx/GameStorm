@@ -194,15 +194,8 @@
   </div>
 
   <!-- 主内容 -->
-  <div class="mx-auto max-w-[1400px] p-5">
+  <div class="mx-auto max-w-350 p-5">
     <!-- 页面标题 -->
-    <div class="mb-8">
-      <h1 class="bg-linear-to-r from-white to-gray-300 bg-clip-text text-4xl font-bold text-transparent">
-        玩家社区
-      </h1>
-      <div class="mt-2 h-1 w-24 rounded-full bg-linear-to-r from-orange-500 to-orange-300"></div>
-      <p class="mt-3 text-gray-400">分享游戏心得，结交游戏好友</p>
-    </div>
 
     <div class="flex flex-col gap-6 lg:flex-row">
       <!-- 左侧：帖子列表 -->
